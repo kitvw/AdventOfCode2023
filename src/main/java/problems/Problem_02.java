@@ -2,7 +2,7 @@ package problems;
 
 import lombok.Data;
 import lombok.extern.log4j.Log4j2;
-import utils.PuzzleInput;
+import common.PuzzleInput;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,9 +93,6 @@ public class Problem_02 {
                     maxGreen = revelation.getGreen();
             }
 
-//            int maxRed = Math.max(1,revelations.stream().max((x,y)-> Math.max(x.getRed(), y.getRed())).get().getRed());
-//            int maxBlue = Math.max(1,revelations.stream().max((x,y)-> Math.max(x.getBlue(), y.getBlue())).get().getBlue());
-//            int maxGreen = Math.max(1,revelations.stream().max((x,y)-> Math.max(x.getGreen(), y.getGreen())).get().getGreen());
             log.debug("Game {}: {} *  {} * {} = {}",id,maxRed,maxBlue,maxGreen,maxRed*maxBlue*maxGreen);
             return maxRed * maxBlue * maxGreen;
         }

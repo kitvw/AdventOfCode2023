@@ -1,8 +1,9 @@
 package problems;
 
+import common.Utils;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
-import utils.PuzzleInput;
+import common.PuzzleInput;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +11,6 @@ import java.util.List;
 
 @Log4j2
 public class Problem_01 {
-    private static final int ASCII_INT_START = 48; // starting at 0
     private static final Map<String, String> numMap = new HashMap<>();
     static {
         numMap.put( "one", "1" );
@@ -40,7 +40,7 @@ public class Problem_01 {
         char[] lineChars = line.toCharArray();
         for(int i = 0; i < lineChars.length; i++) {
             char c = line.charAt(i);
-            if( isInt(c) ) {
+            if( Utils.isInt(c) ) {
                 lastNum = Character.toString(c);
                 if(firstNum.isEmpty())
                     firstNum = Character.toString(c);
@@ -68,9 +68,5 @@ public class Problem_01 {
         String number = firstNum + lastNum;
         log.debug("{} - {}", number, line);
         return Integer.parseInt(number);
-    }
-
-    private static boolean isInt( char c ) {
-        return( (int) c >= ASCII_INT_START && (int) c < ASCII_INT_START + 10 );
     }
 }
