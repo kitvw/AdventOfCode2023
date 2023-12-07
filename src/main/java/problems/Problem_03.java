@@ -55,7 +55,6 @@ public class Problem_03 {
                 if( !number.isEmpty() && containsSpecialChar(subMatrix)) {
                     partNumbers.add(Integer.parseInt(number.toString()));
                     for(StarIndex starIndex: nearbyStars(subMatrix, rowStart, colStart)) {
-                        List<Integer> g = possibleGears.get(starIndex);
                         possibleGears.get(starIndex).add(Integer.parseInt(number.toString()));
                     }
                 }
