@@ -31,7 +31,7 @@ public class PuzzleInput {
     }
 
     @SneakyThrows
-    private static String fileContents( String fileName ) {
+    public static String fileContents( String fileName ) {
         File input = new File(PuzzleInput.class.getClassLoader().getResource(fileName).getFile());
         return FileUtils.readFileToString(input, "UTF-8");
     }
