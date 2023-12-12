@@ -14,7 +14,7 @@ public class Problem_07 {
         Collections.sort(hands);
         long winnings = 0;
         for(int i = 0; i < hands.size(); i++) {
-            log.info("{}", hands.get(i));
+            log.debug("{}", hands.get(i));
             long rank = i + 1;
             winnings += rank * hands.get(i).getBid();
         }
@@ -25,7 +25,8 @@ public class Problem_07 {
         Ace( 'A', 14 ),
         King( 'K', 13 ),
         Queen( 'Q', 12),
-        Jack('J', 11),
+//        Jack('J', 11),
+        Jack('J', 1), // wildcard, but is now weakest point value.
         Ten('T', 10),
         Nine('9', 9),
         Eight('8', 8),
@@ -98,6 +99,23 @@ public class Problem_07 {
                 int count = counts.get(card);
                 counts.put(card, count+1);
             }
+
+            // J is wildcard rule - add it to the most plentiful (highest value) count to increase hand value
+            if(counts.containsKey(Card.Jack)) {
+                if(counts.size() > 1) { // if all jacks, continue processing as normal
+                    int wildcardCount = counts.remove(Card.Jack);
+                    int max = counts.values().stream().max(Integer::compareTo).get();
+                    List<Card> candidates = new ArrayList<>();
+                    for (Card card : counts.keySet()) {
+                        if (counts.get(card) == max)
+                            candidates.add(card);
+                    }
+                    Collections.sort(candidates);
+                    Card wildcardAddsTo = candidates.get(0);
+                    counts.put(wildcardAddsTo, max + wildcardCount);
+                }
+            }
+
             switch(counts.size()) {
                 case 1:
                     return HandType.FiveOfAKind;
