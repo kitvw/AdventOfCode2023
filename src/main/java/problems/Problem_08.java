@@ -1,6 +1,7 @@
 package problems;
 
 import common.PuzzleInput;
+import common.Utils;
 import lombok.Data;
 import lombok.extern.log4j.Log4j2;
 
@@ -55,37 +56,7 @@ public class Problem_08 {
             log.info("steps for simultaneous node {}: {}", simNode.getId(), stepsForAll);
             steps.add(stepsForAll);
         }
-        log.info("LCM for simultaneous nodes: {}", lcm(steps));
-    }
-
-    private static long lcm(List<Integer> numbers) {
-        Map<Integer, Integer> primes = new HashMap<>();
-        for(int number : numbers) {
-            Map<Integer,Integer> factorization = primeFactors(number);
-            for(int prime: factorization.keySet()) {
-                primes.putIfAbsent(prime, 0);
-                primes.put(prime, Math.max(primes.get(prime),factorization.get(prime)));
-            }
-        }
-
-        long lcm = 1;
-        for(int prime: primes.keySet()) {
-            lcm *= (long) Math.pow(prime,primes.get(prime));
-        }
-        return lcm;
-    }
-
-    private static Map<Integer, Integer> primeFactors(int number) {
-        Map<Integer,Integer> primes = new HashMap<>();
-        int workingNumber = number;
-        for( int prime = 2; prime <= workingNumber; prime++) {
-            while(workingNumber%prime == 0) {
-                primes.putIfAbsent(prime, 0);
-                primes.put(prime, primes.get(prime)+1);
-                workingNumber = workingNumber/prime;
-            }
-        }
-        return primes;
+        log.info("LCM for simultaneous nodes: {}", Utils.lcm(steps));
     }
 
     private enum Direction {
