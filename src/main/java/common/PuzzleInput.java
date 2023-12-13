@@ -10,6 +10,10 @@ import java.util.List;
 
 public class PuzzleInput {
 
+    public static List<List<Integer>> getInputLinesAsIntList(String fileName) {
+        return getInputLines(fileName).stream().map(s->Arrays.stream(s.split(" ")).map(Integer::parseInt).toList()).toList();
+    }
+
     @SneakyThrows
     public static List<String> getInputLines(String fileName) {
         return Arrays.stream(fileContents(fileName).split("\r\n")).toList();
